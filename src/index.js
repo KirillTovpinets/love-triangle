@@ -17,7 +17,7 @@ module.exports = function getLoveTrianglesCount(preferences = []) {
   	let second = i + 1;
   	let indexOfSecond = preferences.indexOf(second);
   	var third = preferences[first - 1];
-  	let indexOfThird = preferences.indexOf(third);
+  	let indexOfThird = first - 1;
 
   	couple.push(first);
 	couple.push(second);
@@ -26,7 +26,7 @@ module.exports = function getLoveTrianglesCount(preferences = []) {
 		continue;
 	}
   	if (indexOfSecond === -1 || 
-  		preferences.indexOf(indexOfSecond) === -1 ||
+  		preferences.indexOf(indexOfSecond + 1) === -1 ||
   		second === first ||
   		temp.indexOf(first) !== -1 || temp.indexOf(i + 1) !== -1) {
   		continue;
