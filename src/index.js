@@ -12,23 +12,27 @@ module.exports = function getLoveTrianglesCount(preferences = []) {
 	var numCouples = 0;
 	var temp = [];
   for (var i = 0; i < preferences.length; i++) {
-  	if (temp.indexOf(preferences[i]) !== -1) {
-  		continue;
-  	}
   	var couple = [];
   	let first = preferences[i];
-  	couple.push(first);
   	let second = i + 1;
-  	if (preferences.indexOf(second) === -1 || 
-  		preferences.indexOf(preferences.indexOf(second)) === -1 ||
-  		second === first) {
+  	let indexOfSecond = preferences.indexOf(second);
+  	var third = preferences[first - 1];
+  	let indexOfThird = preferences.indexOf(third);
+
+  	couple.push(first);
+	couple.push(second);
+
+	if ((indexOfSecond+1) !== third) {
+		continue;
+	}
+  	if (indexOfSecond === -1 || 
+  		preferences.indexOf(indexOfSecond) === -1 ||
+  		second === first ||
+  		temp.indexOf(first) !== -1 || temp.indexOf(i + 1) !== -1) {
   		continue;
   	}
-  	couple.push(second);
-  	var third = preferences[first - 1];
-
 	if (couple.indexOf(third) === -1 &&
-		couple.indexOf(preferences.indexOf(third) + 1) !== -1 &&
+		couple.indexOf(indexOfThird + 1) !== -1 &&
 		third !== undefined) {
 		numCouples++;
 		temp.push(first);
